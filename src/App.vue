@@ -1,30 +1,26 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="main-wrapper">
+    <Navigation/>
+    <router-view/>
+  </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+<script>
+import Navigation from "@/components/Navigation";
+export default {
+  components: {Navigation},
+  setup() {
+    return {}
   }
+}
+</script>
+
+<style lang="scss">
+
+.main-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100vh;
+  background-color: #F4F7FE;
 }
 </style>
