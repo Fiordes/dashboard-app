@@ -53,7 +53,17 @@
             <LoginIcon/>
             Log In
           </router-link>
+
         </li>
+        <p class="register-link">Dont have accout yet?
+          <router-link to="/register">
+            Register now!
+          </router-link>
+        </p>
+        <!--  Logout button       -->
+        <!--        <li>-->
+        <!--          Log out-->
+        <!--        </li>-->
       </ul>
     </nav>
   </div>
@@ -165,6 +175,16 @@ export default {
 
     &:not(:last-of-type) {
       margin-bottom: 24px;
+    }
+  }
+  .register-link {
+    display: flex;
+    align-items: center;
+    color: $base-color;
+
+    a {
+      color: $base-blue;
+      margin-left: 4px;
     }
   }
 }
