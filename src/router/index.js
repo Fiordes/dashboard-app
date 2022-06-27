@@ -1,51 +1,58 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+function loadPage(view) {
+  return () =>
+    import(
+      /* webpackChunkName: "view-[request]" */ `@/views/${view}.vue`
+    );
+}
+
 
 const routes = [
   {
     path: '/',
     name: 'dashboard',
-    component:  () => import(/* webpackChunkName: "about" */ '../views/DashboardView.vue')
+    component:  loadPage('DashboardView')
   },
   {
     path: '/activity',
     name: 'activity',
-    component: () => import(/* webpackChunkName: "activity" */ '../views/ActivityView.vue')
+    component: loadPage('ActivityView')
   },
   {
     path: '/library',
     name: 'library',
-    component: () => import(/* webpackChunkName: "library" */ '../views/LibraryView.vue')
+    component: loadPage('LibraryView')
   },
   {
     path: '/security',
     name: 'security',
-    component: () => import(/* webpackChunkName: "security" */ '../views/SecurityView.vue')
+    component: loadPage('SecurityView')
   },
   {
     path: '/schedules',
     name: 'schedules',
-    component: () => import(/* webpackChunkName: "schedules" */ '../views/ScheduleView.vue')
+    component: loadPage('ScheduleView')
   },
   {
     path: '/payouts',
     name: 'payouts',
-    component: () => import(/* webpackChunkName: "payouts" */ '../views/PayoutsView.vue')
+    component: loadPage('PayoutsView')
   },
   {
     path: '/settings',
     name: "settings",
-    component: () => import(/* webpackChunkName: "settings"*/ '../views/SettingsView.vue')
+    component: loadPage('SettingsView')
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/LoginView.vue')
+    component: loadPage('LoginView')
   },
   {
     path: '/register',
     name: 'register',
-    component: () => import(/* webpackChunkName: "register" */ '../views/RegisterView.vue')
+    component: loadPage('RegisterView')
   }
 ]
 

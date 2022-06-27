@@ -1,5 +1,5 @@
 <template>
-  <div class="main-wrapper">
+  <div v-if="appReady" class="main-wrapper">
     <Navigation/>
     <router-view/>
   </div>
@@ -7,10 +7,22 @@
 
 <script>
 import Navigation from "@/components/Navigation";
+import {ref} from "vue";
+import {supabase} from './supabase/init';
+
 export default {
   components: {Navigation},
   setup() {
-    return {}
+    const appReady = ref(true);
+    const user = supabase.auth.user();
+
+    if (!user) {
+      appReady.value = false;
+    }
+
+    return {
+      appReady
+    }
   }
 }
 </script>

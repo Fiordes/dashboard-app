@@ -48,23 +48,26 @@
             Settings
           </router-link>
         </li>
-        <li>
+        <li v-if="!user">
           <router-link to="/login">
             <LoginIcon/>
             Log In
           </router-link>
 
         </li>
-        <p class="register-link">Dont have accout yet?
-          <router-link to="/register">
-            Register now!
-          </router-link>
-        </p>
-        <!--  Logout button       -->
-        <!--        <li>-->
-        <!--          Log out-->
-        <!--        </li>-->
+        <li v-else>
+          <a href="#" @click.prevent="logout" class="logout-link">
+            <LoginIcon/>
+            Logout
+          </a>
+        </li>
+
       </ul>
+      <p class="register-link">Dont have account yet?
+        <router-link to="/register">
+          Register now!
+        </router-link>
+      </p>
     </nav>
   </div>
 </template>
@@ -78,7 +81,8 @@ import SchedulesIcon from "@/components/icons/SchedulesIcon";
 import PayoutsIcon from "@/components/icons/PayoutsIcon";
 import SettingsIcon from "@/components/icons/SettingsIcon";
 import LoginIcon from "@/components/icons/LoginIcon";
-// import {ref} from 'vue';
+import {useStore} from 'vuex';
+import {computed} from 'vue';
 
 export default {
   name: "AppNavigation",
@@ -89,9 +93,16 @@ export default {
   mounted() {
   },
   setup() {
+    const store = useStore();
+    const user = computed(() => store.state.user);
 
-
-    return {}
+    const logout = async () => {
+      store.dispatch('logOutAction')
+    }
+    return {
+      logout,
+      user
+    }
   }
 }
 </script>
@@ -177,6 +188,7 @@ export default {
       margin-bottom: 24px;
     }
   }
+
   .register-link {
     display: flex;
     align-items: center;
