@@ -63,7 +63,7 @@
         </li>
 
       </ul>
-      <p class="register-link">Dont have account yet?
+      <p v-if="!user" class="register-link">Dont have account yet?
         <router-link to="/register">
           Register now!
         </router-link>
