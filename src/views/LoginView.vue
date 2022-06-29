@@ -33,7 +33,7 @@ export default {
       email: null,
       password: null
     });
-    const errorMessage = computed(() => store.state.errorMessage);
+    const errorMessage = computed(() => store.state.auth.errorMessage);
     const login = () => {
       store.dispatch('auth/loginAction', form);
     }

@@ -40,7 +40,7 @@ export default {
       confirmPassword: null,
     });
 
-    const errorMessage = computed(() => store.state.errorMessage);
+    const errorMessage = computed(() => store.state.auth.errorMessage);
 
     const register = () => {
       if (form.password === form.confirmPassword) {
