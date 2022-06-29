@@ -48,7 +48,6 @@ export default createStore({
             });
             if (error) throw error;
 
-            console.log(user)
             commit('setUser', user);
 
             await router.push({name: 'dashboard'})
