@@ -35,7 +35,7 @@ export default {
     });
     const errorMessage = computed(() => store.state.errorMessage);
     const login = () => {
-      store.dispatch('loginAction', form);
+      store.dispatch('auth/loginAction', form);
     }
 
     return {

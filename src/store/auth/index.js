@@ -3,6 +3,7 @@ import router from '../../router';
 import {VueCookieNext as cookie} from 'vue-cookie-next';
 
 export default {
+  namespaced: true,
   state: {
     user: null,
     errorMessage: null,

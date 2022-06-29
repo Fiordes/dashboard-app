@@ -94,10 +94,10 @@ export default {
   },
   setup() {
     const store = useStore();
-    const user = computed(() => store.state.user);
+    const user = computed(() => store.state.auth.user);
 
     const logout = async () => {
-      store.dispatch('logOutAction')
+      store.dispatch('auth/logOutAction')
     }
     return {
       logout,

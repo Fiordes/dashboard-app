@@ -26,7 +26,7 @@ export default {
         );
         if(error) throw error;
 
-        store.commit('setUser', user);
+        store.commit('auth/setUser', user);
       } catch (error) {
         console.log(error)
       }
