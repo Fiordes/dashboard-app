@@ -90,8 +90,6 @@ export default {
     LoginIcon,
     SettingsIcon, PayoutsIcon, SchedulesIcon, SecurityIcon, LibraryIcon, ActivityIcon, DashboardIcon
   },
-  mounted() {
-  },
   setup() {
     const store = useStore();
     const user = computed(() => store.state.auth.user);
