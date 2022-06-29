@@ -1,7 +1,7 @@
 import { createStore } from 'vuex';
 import {supabase} from '../supabase/init';
 import router from '../router';
-import {VueCookieNext} from 'vue-cookie-next';
+import {VueCookieNext as cookie} from 'vue-cookie-next';
 
 export default createStore({
   state: {
@@ -43,12 +43,12 @@ export default createStore({
     //     LOGIN
     async loginAction({commit}, form) {
         try {
-            const {error, user} = await supabase.auth.signIn({
+            const {error, user, session} = await supabase.auth.signIn({
                 email: form.email,
                 password: form.password
             });
             if (error) throw error;
-
+            cookie.setCookie('user', session.access_token);
             commit('setUser', user);
 
             await router.push({name: 'dashboard'})
@@ -65,7 +65,7 @@ export default createStore({
         try {
             const {error} = await supabase.auth.signOut();
             if (error) throw error;
-            VueCookieNext.removeCookie('user');
+            cookie.removeCookie('user');
             commit('setUser', null);
             await router.push({name: 'login'});
 

@@ -32,11 +32,11 @@ export default {
       }
     });
 
-    supabase.auth.onAuthStateChange((_, session) => {
-      if(session) {
-        cookie.setCookie('user', session.access_token)
-      }
-    });
+    // supabase.auth.onAuthStateChange((_, session) => {
+    //   if(session) {
+    //     cookie.setCookie('user', session.access_token)
+    //   }
+    // });
 
     return {
     }
