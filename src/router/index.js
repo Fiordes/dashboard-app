@@ -1,4 +1,5 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router';
+import {VueCookieNext as cookie} from 'vue-cookie-next';
 
 function loadPage(view) {
   return () =>
@@ -59,6 +60,13 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(),
   routes
-})
+});
 
-export default router
+router.beforeEach((to, from, next) => {
+    const token = cookie.getCookie('user');
+    if (to.name !== 'login' && !token) next ({ name: 'login' });
+
+    else next();
+});
+
+export default router;
