@@ -64,7 +64,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const token = cookie.getCookie('user');
-    if (to.name !== 'login' && !token) next ({ name: 'login' });
+    if (to.name !== 'login' && !token && to.name !== 'register') next ({ name: 'login' });
 
     else next();
 });
