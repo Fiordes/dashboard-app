@@ -40,13 +40,13 @@ export default {
       confirmPassword: null,
     });
 
-    const errorMessage = computed(() => store.state.errorMessage);
+    const errorMessage = computed(() => store.state.auth.errorMessage);
 
     const register = () => {
       if (form.password === form.confirmPassword) {
-        store.dispatch("registerAction", form)
+        store.dispatch("auth/registerAction", form)
       } else {
-        store.commit('setErrorMessage', "Password is incorrect")
+        store.commit('auth/setErrorMessage', "Password is incorrect")
       }
 
     }

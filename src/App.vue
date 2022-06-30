@@ -1,5 +1,5 @@
 <template>
-  <div v-if="appReady" class="main-wrapper">
+  <div class="main-wrapper">
     <Navigation/>
     <router-view/>
   </div>
@@ -7,21 +7,38 @@
 
 <script>
 import Navigation from "@/components/Navigation";
-import {ref} from "vue";
+import {onMounted} from "vue";
 import {supabase} from './supabase/init';
+import {useStore} from "vuex";
+import {useCookie} from "vue-cookie-next";
 
 export default {
   components: {Navigation},
   setup() {
-    const appReady = ref(true);
-    const user = supabase.auth.user();
+    const store = useStore();
+    const cookie = useCookie();
 
-    if (!user) {
-      appReady.value = false;
-    }
+    onMounted(async () => {
+      try {
+        if(!cookie.getCookie('user'))  return;
+        const { user, error } = await supabase.auth.api.getUser(
+            cookie.getCookie('user'),
+        );
+        if(error) throw error;
+
+        store.commit('auth/setUser', user);
+      } catch (error) {
+        console.log(error)
+      }
+    });
+
+    // supabase.auth.onAuthStateChange((_, session) => {
+    //   if(session) {
+    //     cookie.setCookie('user', session.access_token)
+    //   }
+    // });
 
     return {
-      appReady
     }
   }
 }

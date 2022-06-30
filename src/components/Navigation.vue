@@ -63,7 +63,7 @@
         </li>
 
       </ul>
-      <p class="register-link">Dont have account yet?
+      <p v-if="!user" class="register-link">Dont have account yet?
         <router-link to="/register">
           Register now!
         </router-link>
@@ -90,14 +90,12 @@ export default {
     LoginIcon,
     SettingsIcon, PayoutsIcon, SchedulesIcon, SecurityIcon, LibraryIcon, ActivityIcon, DashboardIcon
   },
-  mounted() {
-  },
   setup() {
     const store = useStore();
-    const user = computed(() => store.state.user);
+    const user = computed(() => store.state.auth.user);
 
     const logout = async () => {
-      store.dispatch('logOutAction')
+      store.dispatch('auth/logOutAction')
     }
     return {
       logout,
