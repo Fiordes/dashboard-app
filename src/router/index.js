@@ -69,4 +69,11 @@ router.beforeEach((to, from, next) => {
     else next();
 });
 
+router.afterEach((to, from) => {
+  const toDepth = to.path.length
+  const fromDepth = from.path.length
+  console.log(toDepth, fromDepth)
+  to.meta.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+})
+
 export default router;

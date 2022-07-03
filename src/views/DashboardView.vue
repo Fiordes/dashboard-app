@@ -11,7 +11,7 @@
 
 
 export default {
-  name: 'DasboardView',
+  name: 'DashboardView',
   components: {},
   setup() {
 

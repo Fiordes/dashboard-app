@@ -6,7 +6,7 @@ export default {
   namespaced: true,
   state: {
     user: null,
-    errorMessage: null,
+    errorMessage: null
   },
   getters: {
   },

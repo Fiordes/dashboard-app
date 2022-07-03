@@ -6,7 +6,7 @@ describe('Navigation.vue', () => {
     it('Should render logo', () => {
         const wrapper = mount(Navigation, {
             setup() {
-                const user = 'User'
+                //const user = 'User'
             }
         });
 

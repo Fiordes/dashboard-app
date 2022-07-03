@@ -1,30 +1,40 @@
 <template>
   <div class="main-wrapper">
-    <Navigation/>
-    <router-view/>
+    <navigation />
+    <transition :name="transitionName">
+      <router-view :key="route.fullPath" />
+    </transition>
   </div>
 </template>
 
 <script>
+// TODO : FIX TRANSITION FOR ROUTER VIEW
+
+
 import Navigation from "@/components/Navigation";
-import {onMounted} from "vue";
+import {computed, onMounted} from "vue";
 import {supabase} from './supabase/init';
 import {useStore} from "vuex";
 import {useCookie} from "vue-cookie-next";
+import {useRoute} from 'vue-router';
 
 export default {
   components: {Navigation},
   setup() {
     const store = useStore();
     const cookie = useCookie();
+    const route = useRoute();
+
+    const transitionName = computed(() => route.meta.transitionName)
+
 
     onMounted(async () => {
       try {
-        if(!cookie.getCookie('user'))  return;
-        const { user, error } = await supabase.auth.api.getUser(
-            cookie.getCookie('user'),
+        if (!cookie.getCookie('user')) return;
+        const {user, error} = await supabase.auth.api.getUser(
+            cookie.getCookie('user')
         );
-        if(error) throw error;
+        if (error) throw error;
 
         store.commit('auth/setUser', user);
       } catch (error) {
@@ -32,13 +42,9 @@ export default {
       }
     });
 
-    // supabase.auth.onAuthStateChange((_, session) => {
-    //   if(session) {
-    //     cookie.setCookie('user', session.access_token)
-    //   }
-    // });
-
     return {
+      transitionName,
+      route
     }
   }
 }
@@ -51,5 +57,27 @@ export default {
   grid-template-columns: 1fr 2fr;
   height: 100vh;
   background-color: #F4F7FE;
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-left-enter-from,
+.slide-left-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
+}
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+  transition: all 0.5s ease;
+}
+
+.slide-right-enter-from,
+.slide-right-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
 }
 </style>

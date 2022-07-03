@@ -1,69 +1,81 @@
 <template>
   <div class="nav-wrapper">
-    <router-link class="site-logo" to="/">
-      <img src="../assets/images/logo.svg" alt="Logo">
+    <router-link
+      class="site-logo"
+      to="/"
+    >
+      <img
+        src="../assets/images/logo.svg"
+        alt="Logo"
+      >
     </router-link>
 
     <nav>
       <ul>
         <li>
           <router-link to="/">
-            <DashboardIcon/>
+            <dashboard-icon />
             Dashboard
           </router-link>
         </li>
         <li>
           <router-link to="/activity">
-            <ActivityIcon/>
+            <activity-icon />
             Activity
           </router-link>
         </li>
         <li>
           <router-link to="/library">
-            <LibraryIcon/>
+            <library-icon />
             Library
           </router-link>
         </li>
         <li>
           <router-link to="/security">
-            <SecurityIcon/>
+            <security-icon />
             Security
           </router-link>
         </li>
         <li>
           <router-link to="/schedules">
-            <SchedulesIcon/>
+            <schedules-icon />
             Schedules
           </router-link>
         </li>
         <li>
           <router-link to="/payouts">
-            <PayoutsIcon/>
+            <payouts-icon />
             Payouts
           </router-link>
         </li>
         <li>
           <router-link to="/settings">
-            <SettingsIcon/>
+            <settings-icon />
             Settings
           </router-link>
         </li>
         <li v-if="!user">
           <router-link to="/login">
-            <LoginIcon/>
+            <login-icon />
             Log In
           </router-link>
-
         </li>
         <li v-else>
-          <a href="#" @click.prevent="logout" class="logout-link">
-            <LoginIcon/>
+          <a
+            href="#"
+            @click.prevent="logout"
+            class="logout-link"
+          >
+            <login-icon />
             Logout
           </a>
         </li>
-
       </ul>
-      <p v-if="!user" class="register-link">Dont have account yet?
+      <p
+        v-if="!user"
+        class="register-link"
+      >
+        Dont have account yet?
         <router-link to="/register">
           Register now!
         </router-link>
@@ -85,7 +97,7 @@ import {useStore} from 'vuex';
 import {computed} from 'vue';
 
 export default {
-  name: "AppNavigation",
+  name: "Navigation",
   components: {
     LoginIcon,
     SettingsIcon, PayoutsIcon, SchedulesIcon, SecurityIcon, LibraryIcon, ActivityIcon, DashboardIcon
